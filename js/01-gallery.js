@@ -32,7 +32,11 @@ function openingImg(e) {
     return;
   }
 
-  const swatchEl = e.target.dataset.sourse;
-  console.log(e.target);
-  console.log(swatchEl);
+  const swatchEl = e.target.dataset.source;
+
+  const instance = basicLightbox.create(`
+    <img src="${swatchEl}" width="800" height="600">
+`);
+
+  instance.show();
 }
