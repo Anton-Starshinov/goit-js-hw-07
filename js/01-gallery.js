@@ -1,4 +1,38 @@
-import { galleryItems } from './gallery-items.js';
-// Change code below this line
+import { galleryItems } from "./gallery-items.js";
 
-console.log(galleryItems);
+const galleryConteiner = document.querySelector(".gallery");
+const galleryMarcup = galleryLayoutTemplate(galleryItems);
+
+galleryConteiner.insertAdjacentHTML("beforeend", galleryMarcup);
+galleryConteiner.addEventListener("click", openingImg);
+
+function galleryLayoutTemplate(galleryItems) {
+  return galleryItems
+    .map(({ preview, original, description }) => {
+      return `
+  <div class="gallery__item">
+  <a class="gallery__link" href="large-image.jpg">
+    <img
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</div>`;
+    })
+    .join("");
+}
+
+function openingImg(e) {
+  e.preventDefault();
+  const isImgSwatchEl = e.target.classList.contains("gallery__image");
+
+  if (!isImgSwatchEl) {
+    return;
+  }
+
+  const swatchEl = e.target.dataset.sourse;
+  console.log(e.target);
+  console.log(swatchEl);
+}
