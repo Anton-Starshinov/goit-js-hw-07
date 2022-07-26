@@ -39,4 +39,10 @@ function openingImg(e) {
 `);
 
   instance.show();
+
+  galleryConteiner.addEventListener("keydown", (e) => {
+    if (e.code === "Escape") {
+      instance.close();
+    }
+  });
 }
