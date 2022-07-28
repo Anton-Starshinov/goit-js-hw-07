@@ -34,15 +34,24 @@ function openingImg(e) {
 
   const swatchEl = e.target.dataset.source;
 
-  const instance = basicLightbox.create(`
-    <img src="${swatchEl}" width="800" height="600">
-`);
+  const instance = basicLightbox.create(
+    `
+    <img src="${swatchEl}" width="800" height="600">`,
+    {
+      onShow: (instance) => {
+        window.addEventListener("keydown", closeModalEsc);
+      },
+      onClose: (instance) => {
+        window.removeEventListener("keydown", closeModalEsc);
+      },
+    }
+  );
 
   instance.show();
 
-  galleryConteiner.addEventListener("keydown", (e) => {
+  function closeModalEsc(e) {
     if (e.code === "Escape") {
       instance.close();
     }
-  });
+  }
 }
